@@ -1,0 +1,70 @@
+package com.sait.enrollment.service;
+
+import com.sait.enrollment.model.Student;
+import com.sait.enrollment.repository.StudentRepository;
+import com.sait.enrollment.service.exception.EnrollmentException;
+
+import java.util.List;
+
+/**
+ * The rules of the system. The menu (UI) calls this class, and this class calls the repository.
+ * It checks the data first and throws an EnrollmentException when the data is not valid.
+ * <p>
+ * CONCEPT: Subprograms - each public method does one job: add, modify, remove, show all.
+ */
+public class EnrollmentService {
+
+    private final StudentRepository studentRepository = new StudentRepository();
+
+    /**
+     * Adds a new student. A new student must not have an ID yet (the ID is 0).
+     * Returns the same student, now with an ID.
+     * <p>
+     * CONCEPT: Conditionals - if checks for null and for an existing ID.
+     */
+    public Student add(Student student) throws EnrollmentException {
+        if (null == student || student.getStudentId() > 0) {
+            throw new EnrollmentException("invalid student data.");
+        }
+        studentRepository.insert(student);
+        return student;
+    }
+
+    /**
+     * Changes an existing student. The student must have a valid ID (greater than 0).
+     * The data in the given student is copied into the stored student.
+     * Throws an exception if the data is not valid or the ID is not found.
+     * Returns the student that is stored in the repository (not the object that was passed in).
+     */
+    public Student modify(Student student) throws EnrollmentException {
+        if (null == student || student.getStudentId() <= 0) {
+            throw new EnrollmentException("invalid student data.");
+        }
+
+        if (studentRepository.update(student.getStudentId(), student) <= 0) {
+            throw new EnrollmentException("student not found.");
+        }
+        return studentRepository.findStudentById(student.getStudentId());
+    }
+
+    /**
+     * Removes the student with this ID. Returns true if removed, false if the ID is not valid
+     * or not found.
+     * <p>
+     * CONCEPT: Pass by value - studentId is a primitive. This method gets a copy,
+     * so the caller's variable never changes.
+     */
+    public boolean remove(long studentId) {
+        if (studentId <= 0) {
+            return false;
+        }
+        return studentRepository.delete(studentId) > 0;
+    }
+
+    /**
+     * Returns all students. The list is a copy (see StudentRepository.findAll).
+     */
+    public List<Student> showAllStudents() {
+        return studentRepository.findAll();
+    }
+}
