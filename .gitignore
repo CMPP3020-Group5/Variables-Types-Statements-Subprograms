@@ -1,0 +1,16 @@
+# IDE files
+.idea/
+*.iml
+
+# Build output
+out/
+*.class
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# macOS
+.DS_Store
