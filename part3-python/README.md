@@ -15,4 +15,3 @@ python main.py
 ## Notes
 
 - The menus, messages, and results should match the Java version.
-- Code that was written or changed with help from an online tool is marked in the code comments.

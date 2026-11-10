@@ -32,7 +32,3 @@ Both programs should show the same menus, messages, and results.
 | TBD | Part 3 (Python) |
 
 Everyone helps with Part 1 (pseudocode), Part 4 (comparison), and Part 5 (peer review).
-
-## Notes
-
-- Code that was written or changed with help from an online tool is marked in the code comments, as the assignment requires.
