@@ -1,0 +1,22 @@
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): [ERROR]: please enter a whole number between 1 and 6.
+Choose an option (1-6): [ERROR]: please enter a whole number between 1 and 6.
+Choose an option (1-6): [ERROR]: please enter a whole number between 1 and 6.
+Choose an option (1-6): [ERROR]: value cannot be empty.
+Choose an option (1-6): No students found.
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): Goodbye.

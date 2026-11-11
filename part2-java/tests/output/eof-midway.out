@@ -1,0 +1,11 @@
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): First name: Last name: Date of birth (yyyy-MM-dd): 
+Input ended.
+Goodbye.

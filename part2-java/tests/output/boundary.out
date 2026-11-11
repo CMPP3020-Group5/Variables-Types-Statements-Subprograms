@@ -1,0 +1,47 @@
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): First name: Last name: Date of birth (yyyy-MM-dd): Gender (M/F/X): Previous GPA (0.0-4.0): Current semester (1-4): Program: Number of courses: Student added.
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): First name: Last name: Date of birth (yyyy-MM-dd): Gender (M/F/X): Previous GPA (0.0-4.0): Current semester (1-4): Program: Number of courses: Student added.
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): First name: Last name: Date of birth (yyyy-MM-dd): Gender (M/F/X): Previous GPA (0.0-4.0): Current semester (1-4): Program: Number of courses: Student added.
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): ID: 1 | Name: Ann Low | DOB: 1999-12-31 | Gender: X | GPA: 0.00 | Semester: 1 | Program: Networking | Courses: 0
+ID: 2 | Name: Max High | DOB: 2002-02-28 | Gender: F | GPA: 4.00 | Semester: 4 | Program: Software Development | Courses: 10
+ID: 3 | Name: Sam Lee | DOB: 2001-05-20 | Gender: F | GPA: 3.50 | Semester: 2 | Program: Data Analytics | Courses: 6
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): Goodbye.

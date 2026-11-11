@@ -1,0 +1,29 @@
+1
+Ann
+Low
+1999-12-31
+X
+0.0
+1
+Networking
+0
+1
+Max
+High
+2002-02-28
+F
+4.0
+4
+Software Development
+10
+1
+  Sam  
+  Lee  
+ 2001-05-20 
+ f 
+ 3.5 
+ 2 
+  Data Analytics  
+ 6 
+4
+6

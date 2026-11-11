@@ -38,15 +38,42 @@ The code is in `src/main/java/com/sait/enrollment/`.
 | `repository/IdGenerator.java` | Gives out the student IDs (1, 2, 3, ...) |
 | `service/EnrollmentService.java` | The rules: checks the data, then calls the repository for add, modify, remove, and show all |
 | `service/exception/EnrollmentException.java` | The error thrown when the data is not valid or a student is not found |
+| `util/InputHelper.java` | Reads the user input and checks it. It asks again until the input is valid |
+| `util/exception/InputEndedException.java` | The error thrown when the input ends (for example Ctrl+D) while the program wants to read more |
 
-How the classes work together: `Main` calls `EnrollmentService`, the service calls `StudentRepository`, and the repository stores `Student` objects.
+How the classes work together: `Main` shows the menu and uses `InputHelper` to read the input. It then calls `EnrollmentService`, the service calls `StudentRepository`, and the repository stores `Student` objects.
 
 (These names may change. Please update this table if they do.)
 
 ## Status
 
-Work in progress. The model, repository, and service are done. The menu in `Main` is not finished yet (for now `Main` only runs a small test).
+Work in progress.
+
+| Menu option | Status |
+|---|---|
+| 1. Add student | Done |
+| 2. Modify student | Not done yet |
+| 3. Remove student | Not done yet |
+| 4. Display all students | Done |
+| 5. Parameter-passing demo | Not done yet |
+| 6. Exit | Done |
 
 ## Testing
 
-We tested normal inputs, edge cases, and invalid inputs (for example, empty input, wrong date format, and a student ID that does not exist). Test screenshots are in the `tests/` folder, if included.
+The folder `tests/` has input files. Each file is a list of the lines a user would type, so we can run the program without typing.
+
+Run one file (compile first, see "How to run"):
+
+```bash
+java -cp out com.sait.enrollment.Main < tests/happy-path.txt
+```
+
+Run all files. The script compiles the program and saves each output in `tests/output/`:
+
+```bash
+bash tests/run-tests.sh
+```
+
+We tested normal inputs, edge cases, and invalid inputs (for example, empty input, wrong date format, a date that does not exist, and numbers out of range), and input that ends in the middle of a question. See `tests/README.md` for what each file tests.
+
+When the input comes from a file, the typed lines are not shown on the screen, so the questions appear one after another on the same line. This is normal.

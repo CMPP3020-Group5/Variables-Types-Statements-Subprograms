@@ -1,0 +1,50 @@
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): First name: [ERROR]: value cannot be empty.
+First name: Last name: [ERROR]: value cannot be empty.
+Last name: Date of birth (yyyy-MM-dd): [ERROR]: invalid date, use yyyy-MM-dd.
+Date of birth (yyyy-MM-dd): [ERROR]: invalid date, use yyyy-MM-dd.
+Date of birth (yyyy-MM-dd): [ERROR]: date of birth cannot be in the future.
+Date of birth (yyyy-MM-dd): [ERROR]: invalid date, use yyyy-MM-dd.
+Date of birth (yyyy-MM-dd): [ERROR]: value cannot be empty.
+Date of birth (yyyy-MM-dd): Gender (M/F/X): [ERROR]: gender must be M, F or X.
+Gender (M/F/X): [ERROR]: gender must be M, F or X.
+Gender (M/F/X): [ERROR]: value cannot be empty.
+Gender (M/F/X): Previous GPA (0.0-4.0): [ERROR]: please enter a number between 0.0 and 4.0.
+Previous GPA (0.0-4.0): [ERROR]: please enter a number between 0.0 and 4.0.
+Previous GPA (0.0-4.0): [ERROR]: please enter a number between 0.0 and 4.0.
+Previous GPA (0.0-4.0): [ERROR]: value cannot be empty.
+Previous GPA (0.0-4.0): [ERROR]: please enter a number between 0.0 and 4.0.
+Previous GPA (0.0-4.0): Current semester (1-4): [ERROR]: please enter a whole number between 1 and 4.
+Current semester (1-4): [ERROR]: please enter a whole number between 1 and 4.
+Current semester (1-4): [ERROR]: please enter a whole number between 1 and 4.
+Current semester (1-4): Program: [ERROR]: value cannot be empty.
+Program: Number of courses: [ERROR]: please enter a whole number between 0 and 10.
+Number of courses: [ERROR]: please enter a whole number between 0 and 10.
+Number of courses: [ERROR]: please enter a whole number between 0 and 10.
+Number of courses: [ERROR]: please enter a whole number between 0 and 10.
+Number of courses: Student added.
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): ID: 1 | Name: Jason Wu | DOB: 2000-01-01 | Gender: M | GPA: 3.60 | Semester: 1 | Program: Software Development | Courses: 5
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): Goodbye.
