@@ -1,5 +1,6 @@
 package com.sait.enrollment;
 
+import com.sait.enrollment.demo.ParameterDemo;
 import com.sait.enrollment.model.Student;
 import com.sait.enrollment.service.EnrollmentService;
 import com.sait.enrollment.service.exception.EnrollmentException;
@@ -46,6 +47,7 @@ public class Main {
                         printAll(enrollmentService);
                         break;
                     case 5:
+                        ParameterDemo.run();
                         break;
                     case 6:
                         // Leave main. The finally block below prints "Goodbye." once.

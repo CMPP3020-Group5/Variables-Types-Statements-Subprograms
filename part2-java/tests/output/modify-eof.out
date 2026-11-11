@@ -1,0 +1,31 @@
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): First name: Last name: Date of birth (yyyy-MM-dd): Gender (M/F/X): Previous GPA (0.0-4.0): Current semester (1-4): Program: Number of courses: Student added.
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): Student ID: ID: 1 | Name: Jason Wu | DOB: 2000-01-01 | Gender: M | GPA: 3.60 | Semester: 1 | Program: Software Development | Courses: 5
+
+0. Cancel
+1. First name
+2. Last name
+3. Date of birth
+4. Gender
+5. Previous GPA
+6. Current semester
+7. Program
+8. Number of courses
+Choose a field to change (0-8): Previous GPA (0.0-4.0): 
+Input ended.
+Goodbye.

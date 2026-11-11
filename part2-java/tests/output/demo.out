@@ -1,0 +1,43 @@
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): 
+=== Parameter-passing demo ===
+
+[1] Primitive (int): pass by value
+Before: courses = 5
+Inside method: courses = 6
+After:  courses = 5
+-> The method got a copy of the number, so the original did not change.
+
+[2] Object (Student): change a field
+Before: Jason Wu, GPA 3.60
+Inside method: GPA = 4.00
+After:  Jason Wu, GPA 4.00
+-> The method got a copy of the reference, but it points to the same object, so the change is visible.
+
+[3] Object (Student): assign a new object
+Before: Jason Wu
+Inside method: Amy Lee
+After:  Jason Wu
+-> The method changed only its own copy of the reference. The caller's reference did not change.
+
+[4] String: immutable
+Before: program = Software Development
+Inside method: program = Software Development (Year 2)
+After:  program = Software Development
+-> A String cannot be changed. The method made a new String.
+
+=== Student Enrollment Management System ===
+1. Add student
+2. Modify student
+3. Remove student
+4. Display all students
+5. Parameter-passing demo
+6. Exit
+Choose an option (1-6): Goodbye.
