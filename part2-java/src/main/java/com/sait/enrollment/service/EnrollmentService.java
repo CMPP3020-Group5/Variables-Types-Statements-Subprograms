@@ -67,4 +67,15 @@ public class EnrollmentService {
     public List<Student> showAllStudents() {
         return studentRepository.findAll();
     }
+
+    /**
+     * Returns the student with this ID, or null if there is none.
+     * <p>
+     * CONCEPT: Referencing - this returns the stored object itself, not a copy. The caller should not
+     * change it directly. To change a student, make a copy, change the copy and call modify().
+     */
+    public Student findStudentById(long studentId) {
+        return studentRepository.findStudentById(studentId);
+    }
+
 }

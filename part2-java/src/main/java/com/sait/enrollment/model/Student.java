@@ -56,6 +56,26 @@ public class Student {
         this.numberOfCourses = numberOfCourses;
     }
 
+    /**
+     * Copy constructor: creates a new student with the same ID and the same data as the given student.
+     * <p>
+     * CONCEPT: Static binding - this class has two constructors with different parameters (method overloading).
+     * Java chooses the right one at compile time, from the arguments in new Student(...).
+     * CONCEPT: Referencing - the copy is a new object. Changing a field of the copy does not change the original.
+     * String and LocalDate cannot be changed, so the copy can safely share them with the original.
+     */
+    public Student(Student student) {
+        this.studentId = student.getStudentId();
+        this.firstName = student.getFirstName();
+        this.lastName = student.getLastName();
+        this.birthDate = student.getBirthDate();
+        this.gender = student.getGender();
+        this.previousGpa = student.getPreviousGpa();
+        this.currentSemester = student.getCurrentSemester();
+        this.program = student.getProgram();
+        this.numberOfCourses = student.getNumberOfCourses();
+    }
+
     public long getStudentId() {
         return studentId;
     }

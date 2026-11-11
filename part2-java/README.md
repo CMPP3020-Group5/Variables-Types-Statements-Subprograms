@@ -38,6 +38,7 @@ The code is in `src/main/java/com/sait/enrollment/`.
 | `repository/IdGenerator.java` | Gives out the student IDs (1, 2, 3, ...) |
 | `service/EnrollmentService.java` | The rules: checks the data, then calls the repository for add, modify, remove, and show all |
 | `service/exception/EnrollmentException.java` | The error thrown when the data is not valid or a student is not found |
+| `demo/ParameterDemo.java` | The parameter-passing demo (menu option 5): shows pass by value and the copy of a reference |
 | `util/InputHelper.java` | Reads the user input and checks it. It asks again until the input is valid |
 | `util/exception/InputEndedException.java` | The error thrown when the input ends (for example Ctrl+D) while the program wants to read more |
 
@@ -52,10 +53,10 @@ Work in progress.
 | Menu option | Status |
 |---|---|
 | 1. Add student | Done |
-| 2. Modify student | Not done yet |
-| 3. Remove student | Not done yet |
+| 2. Modify student | Done |
+| 3. Remove student | Done |
 | 4. Display all students | Done |
-| 5. Parameter-passing demo | Not done yet |
+| 5. Parameter-passing demo | Done |
 | 6. Exit | Done |
 
 ## Testing
@@ -74,6 +75,6 @@ Run all files. The script compiles the program and saves each output in `tests/o
 bash tests/run-tests.sh
 ```
 
-We tested normal inputs, edge cases, and invalid inputs (for example, empty input, wrong date format, a date that does not exist, and numbers out of range), and input that ends in the middle of a question. See `tests/README.md` for what each file tests.
+We tested all menu options (Add, Modify, Remove, Display, the demo, and Exit) with normal inputs, edge cases, and invalid inputs (for example, empty input, wrong date format, a date that does not exist, an unknown student ID, and numbers out of range), and input that ends in the middle of a question. See `tests/README.md` for what each file tests.
 
 When the input comes from a file, the typed lines are not shown on the screen, so the questions appear one after another on the same line. This is normal.

@@ -1,5 +1,6 @@
 package com.sait.enrollment;
 
+import com.sait.enrollment.demo.ParameterDemo;
 import com.sait.enrollment.model.Student;
 import com.sait.enrollment.service.EnrollmentService;
 import com.sait.enrollment.service.exception.EnrollmentException;
@@ -37,13 +38,16 @@ public class Main {
                         addStudent(inputHelper, enrollmentService);
                         break;
                     case 2:
+                        modifyStudent(inputHelper, enrollmentService);
                         break;
                     case 3:
+                        removeStudent(inputHelper, enrollmentService);
                         break;
                     case 4:
                         printAll(enrollmentService);
                         break;
                     case 5:
+                        ParameterDemo.run();
                         break;
                     case 6:
                         // Leave main. The finally block below prints "Goodbye." once.
@@ -104,6 +108,96 @@ public class Main {
             System.out.println("Student added.");
         } catch (EnrollmentException e) {
             System.out.println("[ERROR]: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Changes one field of an existing student: asks for the ID, shows the student, asks which field to change,
+     * and reads the new value. Choosing 0 cancels.
+     * <p>
+     * The change is made on a copy of the student. The stored student is updated only at the end, by
+     * service.modify(). So if the input ends in the middle, the stored data is not changed.
+     * <p>
+     * CONCEPT: Data types - readInt returns an int, and we store it in a long. Java converts it by itself
+     * (implicit conversion), because every int value fits in a long.
+     * CONCEPT: Referencing - the null check handles "student not found". The copy and the stored student
+     * are two different objects.
+     * CONCEPT: Conditionals - a switch chooses the field to change.
+     */
+    private static void modifyStudent(InputHelper inputHelper, EnrollmentService service) {
+        long studentId = inputHelper.readInt("Student ID", 1, Integer.MAX_VALUE);
+        Student student = service.findStudentById(studentId);
+        if (student == null) {
+            System.out.println("[ERROR]: student not found.");
+            return;
+        }
+        System.out.println(student);
+        System.out.println();
+        System.out.println("0. Cancel");
+        System.out.println("1. First name");
+        System.out.println("2. Last name");
+        System.out.println("3. Date of birth");
+        System.out.println("4. Gender");
+        System.out.println("5. Previous GPA");
+        System.out.println("6. Current semester");
+        System.out.println("7. Program");
+        System.out.println("8. Number of courses");
+
+        // Work on a copy. The stored student does not change until service.modify() is called.
+        Student updatingStudent = new Student(student);
+        int choice = inputHelper.readInt("Choose a field to change (0-8)", 0, 8);
+        switch (choice) {
+            case 0:
+                System.out.println("Modify cancelled.");
+                return;
+            case 1:
+                updatingStudent.setFirstName(inputHelper.readNonEmpty("First name"));
+                break;
+            case 2:
+                updatingStudent.setLastName(inputHelper.readNonEmpty("Last name"));
+                break;
+            case 3:
+                updatingStudent.setBirthDate(inputHelper.readDate("Date of birth (yyyy-MM-dd)"));
+                break;
+            case 4:
+                updatingStudent.setGender(inputHelper.readGender("Gender (M/F/X)"));
+                break;
+            case 5:
+                updatingStudent.setPreviousGpa(inputHelper.readDouble("Previous GPA (0.0-4.0)", 0.0, 4.0));
+                break;
+            case 6:
+                updatingStudent.setCurrentSemester(inputHelper.readInt("Current semester (1-4)", 1, 4));
+                break;
+            case 7:
+                updatingStudent.setProgram(inputHelper.readNonEmpty("Program"));
+                break;
+            case 8:
+                updatingStudent.setNumberOfCourses(inputHelper.readInt("Number of courses", 0, 10));
+                break;
+            default:
+                break;
+        }
+        try {
+            service.modify(updatingStudent);
+            System.out.println("Student updated.");
+        } catch (EnrollmentException e) {
+            System.out.println("[ERROR]: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Removes the student with the ID that the user types.
+     * <p>
+     * CONCEPT: Data types - the int from readInt is converted to a long automatically (implicit conversion).
+     * CONCEPT: Conditionals - if/else prints a message for success or for "not found".
+     * CONCEPT: Pass by value - the long studentId is copied into service.remove(). The method cannot change our variable.
+     */
+    private static void removeStudent(InputHelper inputHelper, EnrollmentService service) {
+        long studentId = inputHelper.readInt("Student ID", 1, Integer.MAX_VALUE);
+        if (service.remove(studentId)) {
+            System.out.println("Student removed.");
+        } else {
+            System.out.println("[ERROR]: student not found.");
         }
     }
 
