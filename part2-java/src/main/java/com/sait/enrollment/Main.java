@@ -14,28 +14,25 @@ import java.time.LocalDate;
  * Program entry point. It shows the menu in a loop and calls the other classes.
  * The program ends when the user chooses Exit or when the input ends (EOF).
  * <p>
- * CONCEPT: Conditionals - a switch statement sends each menu choice to the right method,
- * and a while loop repeats the menu.
+ * CONCEPT: Conditionals - switch picks the action, and while repeats the menu.
  */
 public class Main {
 
-    // CONCEPT: Subprograms - main is the method where Java starts the program.
+    // CONCEPT: Subprograms - main is where Java starts the program.
     public static void main(String[] args) {
 
         try {
-            // CONCEPT: Scope - these two variables are declared before the loop (inside the try block), so they live for the whole loop.
-            // We create only one InputHelper (one Scanner). Many Scanners on System.in can lose input.
+            // CONCEPT: Scope - these variables live for the whole loop.
+            // We use only one InputHelper (one Scanner).
             InputHelper inputHelper = new InputHelper();
-            // CONCEPT: Dynamic binding - the variable type is the interface EnrollmentService, but the object is a LocalEnrollmentService.
-            // When we call a method on this variable, Java chooses the method of the real object at run time.
+            // CONCEPT: Dynamic binding - the variable type is the interface, but the object is a LocalEnrollmentService.
+            // Java runs the methods of the real object.
             EnrollmentService enrollmentService = new LocalEnrollmentService();
             while (true) {
                 printMenu();
-                // CONCEPT: Scope - choice is declared inside the loop, so it only exists in this block.
-                // A new variable is made on each round of the loop.
+                // CONCEPT: Scope - choice exists only inside this loop block.
                 int choice = inputHelper.readInt("Choose an option (1-6)", 1, 6);
-                // CONCEPT: Conditionals - switch chooses one case. Each case ends with break so Java
-                // does not run the next case too.
+                // CONCEPT: Conditionals - each case ends with break, so Java does not run the next case.
                 switch (choice) {
                     case 1:
                         addStudent(inputHelper, enrollmentService);
@@ -53,7 +50,7 @@ public class Main {
                         ParameterDemo.run();
                         break;
                     case 6:
-                        // Leave main. The finally block below prints "Goodbye." once.
+                        // Leave main. The finally block prints "Goodbye.".
                         return;
                     default:
                         break;
@@ -61,18 +58,18 @@ public class Main {
             }
         } catch (InputEndedException e) {
             System.out.println();
-            // The input stream ended (EOF), for example Ctrl+D or the end of an input file.
-            // All methods in InputHelper throw InputEndedException, and we catch it only here.
+            // The input ended (EOF), for example Ctrl+D or the end of an input file.
+            // InputHelper throws InputEndedException, and we catch it only here.
             System.out.println("Input ended.");
         } finally {
-            // CONCEPT: Exceptions - finally always runs, for both Exit and EOF, so "Goodbye." is printed once.
+            // CONCEPT: Exceptions - finally always runs, so "Goodbye." is printed once.
             exit();
         }
 
     }
 
     /**
-     * Prints the main menu. The text is fixed because the Python version must print the same text.
+     * Prints the main menu. The text is fixed, because Python must print the same text.
      */
     private static void printMenu() {
         System.out.println();
@@ -86,13 +83,12 @@ public class Main {
     }
 
     /**
-     * Asks for all fields of a new student, one by one, and then adds the student.
-     * Each field is checked as soon as it is typed. The student is added only after all fields are valid.
+     * Asks for each field, checks it right away, and then adds the student.
      * <p>
-     * CONCEPT: Data types - int, double and char are primitive types. String and LocalDate are reference types.
-     * CONCEPT: Pass by value of a reference - the method gets copies of the references to inputHelper
-     * and service. Both copies point to the same objects that main created.
-     * CONCEPT: Exceptions - EnrollmentException is a checked exception, so we must catch it here.
+     * CONCEPT: Data types - int, double and char are primitive. String and LocalDate are objects.
+     * CONCEPT: Pass by value - the method gets copies of the references to inputHelper and service.
+     * They point to the same objects.
+     * CONCEPT: Exceptions - EnrollmentException is checked, so we must catch it.
      */
     private static void addStudent(InputHelper inputHelper, EnrollmentService service) {
         String firstName = inputHelper.readNonEmpty("First name");
@@ -115,17 +111,14 @@ public class Main {
     }
 
     /**
-     * Changes one field of an existing student: asks for the ID, shows the student, asks which field to change,
-     * and reads the new value. Choosing 0 cancels.
+     * Changes one field of a student. It asks for the ID, shows the student, and asks which field to change.
+     * Choosing 0 cancels.
      * <p>
-     * The change is made on a copy of the student. The stored student is updated only at the end, by
-     * service.modify(). So if the input ends in the middle, the stored data is not changed.
+     * The change is made on a copy. The stored student changes only when service.modify() is called.
      * <p>
-     * CONCEPT: Data types - readInt returns an int, and we store it in a long. Java converts it by itself
-     * (implicit conversion), because every int value fits in a long.
-     * CONCEPT: Referencing - the null check handles "student not found". The copy and the stored student
-     * are two different objects.
-     * CONCEPT: Conditionals - a switch chooses the field to change.
+     * CONCEPT: Data types - the int is converted to a long automatically (implicit conversion).
+     * CONCEPT: Referencing - null means "not found". The copy and the stored student are two objects.
+     * CONCEPT: Conditionals - switch picks the field.
      */
     private static void modifyStudent(InputHelper inputHelper, EnrollmentService service) {
         long studentId = inputHelper.readInt("Student ID", 1, Integer.MAX_VALUE);
@@ -146,7 +139,7 @@ public class Main {
         System.out.println("7. Program");
         System.out.println("8. Number of courses");
 
-        // Work on a copy. The stored student does not change until service.modify() is called.
+        // Work on a copy. The stored student stays the same until service.modify().
         Student updatingStudent = new Student(student);
         int choice = inputHelper.readInt("Choose a field to change (0-8)", 0, 8);
         switch (choice) {
@@ -191,9 +184,9 @@ public class Main {
     /**
      * Removes the student with the ID that the user types.
      * <p>
-     * CONCEPT: Data types - the int from readInt is converted to a long automatically (implicit conversion).
-     * CONCEPT: Conditionals - if/else prints a message for success or for "not found".
-     * CONCEPT: Pass by value - the long studentId is copied into service.remove(). The method cannot change our variable.
+     * CONCEPT: Data types - the int is converted to a long automatically.
+     * CONCEPT: Pass by value - studentId is copied, so remove() cannot change our variable.
+     * CONCEPT: Conditionals - if/else prints success or "not found".
      */
     private static void removeStudent(InputHelper inputHelper, EnrollmentService service) {
         long studentId = inputHelper.readInt("Student ID", 1, Integer.MAX_VALUE);
@@ -205,7 +198,7 @@ public class Main {
     }
 
     /**
-     * Prints the goodbye message. It does not stop the program by itself.
+     * Prints the goodbye message.
      */
     private static void exit() {
         System.out.println("Goodbye.");
@@ -215,9 +208,8 @@ public class Main {
     /**
      * Prints every student, or a message when there are none.
      * <p>
-     * CONCEPT: Subprograms - a small method with its own job. The menu calls it for "Display all students".
+     * CONCEPT: Subprograms - a small method with one job.
      * CONCEPT: Conditionals - if handles the empty list.
-     * CONCEPT: Pass by value of a reference - the method gets a copy of the reference to the service.
      */
     private static void printAll(EnrollmentService service) {
         if (service.showAllStudents().isEmpty()) {

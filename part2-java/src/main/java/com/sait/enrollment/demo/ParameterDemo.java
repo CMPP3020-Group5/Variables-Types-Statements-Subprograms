@@ -6,13 +6,13 @@ import java.time.LocalDate;
 import java.util.Locale;
 
 /**
- * Shows how Java passes arguments to methods. It does not read any input and it does not use the stored students.
- * Each part prints "Before", "Inside method" and "After", so we can see what the method changed.
+ * Shows how Java passes arguments to methods. It does not read input.
+ * Each part prints "Before", "Inside method" and "After".
  * <p>
- * Java always passes arguments by value. For an object, the value that is copied is the reference.
+ * Java always passes by value. For an object, the value that is copied is the reference.
  * <p>
- * CONCEPT: Subprograms - run() calls four small methods, and each method shows one case.
- * CONCEPT: Static binding - all methods here are static, so Java knows at compile time which method is called.
+ * CONCEPT: Subprograms - run() calls four small methods, one for each case.
+ * CONCEPT: Static binding - all methods are static, so Java knows at compile time which one is called.
  */
 public class ParameterDemo {
 
@@ -32,10 +32,8 @@ public class ParameterDemo {
     // ---------- Part 1: primitive ----------
 
     /**
-     * CONCEPT: Pass by value - an int is a primitive. The method gets a copy of the number,
-     * so the variable in this method does not change.
-     * CONCEPT: Scope - the variable courses here and the parameter courses in changeNumber have the same name,
-     * but they are two different variables. Each one exists only inside its own method.
+     * CONCEPT: Pass by value - an int is copied, so the variable here does not change.
+     * CONCEPT: Scope - courses here and courses in changeNumber are two different variables.
      */
     private static void demoPrimitive() {
         System.out.println();
@@ -56,8 +54,7 @@ public class ParameterDemo {
 
     /**
      * CONCEPT: Pass by value of a reference - the method gets a copy of the reference.
-     * Both references point to the same Student object, so a change made through the copy is visible here.
-     * CONCEPT: Referencing - two references to one object.
+     * Both references point to the same Student, so the change is visible here.
      */
     private static void demoChangeField() {
         System.out.println();
@@ -77,9 +74,8 @@ public class ParameterDemo {
     // ---------- Part 3: object, assign a new object ----------
 
     /**
-     * CONCEPT: Java is NOT pass by reference. If it were, assigning a new object to the parameter
-     * would change the variable of the caller. It does not, because the method only has its own copy
-     * of the reference.
+     * CONCEPT: Java is NOT pass by reference. Assigning a new object to the parameter does not change
+     * the caller's variable, because the method has only a copy of the reference.
      */
     private static void demoNewObject() {
         System.out.println();
@@ -99,8 +95,8 @@ public class ParameterDemo {
     // ---------- Part 4: String ----------
 
     /**
-     * CONCEPT: Data types - String is a reference type, but it is immutable (it cannot be changed).
-     * Adding text to it creates a new String, so the caller's String stays the same.
+     * CONCEPT: Data types - String is an object, but it cannot be changed.
+     * Adding text makes a new String.
      */
     private static void demoString() {
         System.out.println();

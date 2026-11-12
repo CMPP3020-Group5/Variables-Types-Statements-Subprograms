@@ -45,11 +45,9 @@ The code is in `src/main/java/com/sait/enrollment/`.
 
 How the classes work together: `Main` shows the menu and uses `InputHelper` to read the input. It then calls the `EnrollmentService` interface. The real object behind it is `LocalEnrollmentService` (dynamic binding), which calls `StudentRepository`. The repository stores `Student` objects.
 
-(These names may change. Please update this table if they do.)
-
 ## Status
 
-Work in progress.
+All menu options are done.
 
 | Menu option | Status |
 |---|---|
