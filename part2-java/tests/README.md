@@ -30,3 +30,21 @@ bash tests/run-tests.sh
 | `remove-normal.txt` | Remove: add two students, remove them one by one, display after each |
 | `remove-invalid.txt` | Remove: unknown ID, ID that is not a number or out of range, removing the same ID twice |
 | `demo.txt` | Menu option 5 (parameter-passing demo), then exit |
+
+## Screenshots
+
+The folder `screenshots/` has a screenshot of the terminal for each test. Each screenshot shows the command and the full output. The output files in `output/` have the same text.
+
+| Screenshot | Test file | What it shows |
+|---|---|---|
+| `01-happy-path.png` | `happy-path.txt` | Add two students, display them, exit |
+| `02-invalid-menu.png` | `invalid-menu.txt` | Wrong menu input and display with no students |
+| `03-invalid-add.png` | `invalid-add.txt` | Wrong input for every field of Add, then a correct value |
+| `04-boundary.png` | `boundary.txt` | Lowest and highest allowed values, extra spaces |
+| `05-eof-midway.png` | `eof-midway.txt` | The input ends in the middle of Add |
+| `06-modify-normal.png` | `modify-normal.txt` | Change each of the 8 fields of a student |
+| `07-modify-invalid.png` | `modify-invalid.txt` | Modify: unknown ID, cancel, wrong field choice, wrong values |
+| `08-remove-normal.png` | `remove-normal.txt` | Remove students one by one |
+| `09-remove-invalid.png` | `remove-invalid.txt` | Remove: unknown ID, wrong ID, removing the same ID twice |
+| `10-demo.png` | `demo.txt` | The parameter-passing demo (menu option 5) |
+| `11-interactive.png` | (typed by hand) | Add, Modify, Remove and Display with the typed input visible |
