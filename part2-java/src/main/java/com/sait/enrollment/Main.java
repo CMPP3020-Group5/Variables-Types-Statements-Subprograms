@@ -4,6 +4,7 @@ import com.sait.enrollment.demo.ParameterDemo;
 import com.sait.enrollment.model.Student;
 import com.sait.enrollment.service.EnrollmentService;
 import com.sait.enrollment.service.exception.EnrollmentException;
+import com.sait.enrollment.service.impl.LocalEnrollmentService;
 import com.sait.enrollment.util.InputHelper;
 import com.sait.enrollment.util.exception.InputEndedException;
 
@@ -25,7 +26,9 @@ public class Main {
             // CONCEPT: Scope - these two variables are declared before the loop (inside the try block), so they live for the whole loop.
             // We create only one InputHelper (one Scanner). Many Scanners on System.in can lose input.
             InputHelper inputHelper = new InputHelper();
-            EnrollmentService enrollmentService = new EnrollmentService();
+            // CONCEPT: Dynamic binding - the variable type is the interface EnrollmentService, but the object is a LocalEnrollmentService.
+            // When we call a method on this variable, Java chooses the method of the real object at run time.
+            EnrollmentService enrollmentService = new LocalEnrollmentService();
             while (true) {
                 printMenu();
                 // CONCEPT: Scope - choice is declared inside the loop, so it only exists in this block.

@@ -36,13 +36,14 @@ The code is in `src/main/java/com/sait/enrollment/`.
 | `model/Student.java` | The student record: fields, getters, setters, `toString()` and `copyFrom()` |
 | `repository/StudentRepository.java` | The "fake database": keeps the students in memory and does insert, update, delete, and find |
 | `repository/IdGenerator.java` | Gives out the student IDs (1, 2, 3, ...) |
-| `service/EnrollmentService.java` | The rules: checks the data, then calls the repository for add, modify, remove, and show all |
+| `service/EnrollmentService.java` | An interface: the list of actions (add, modify, remove, show all, find by ID). It has no code for the work |
+| `service/impl/LocalEnrollmentService.java` | Implements the interface. The rules: checks the data, then calls the repository |
 | `service/exception/EnrollmentException.java` | The error thrown when the data is not valid or a student is not found |
 | `demo/ParameterDemo.java` | The parameter-passing demo (menu option 5): shows pass by value and the copy of a reference |
 | `util/InputHelper.java` | Reads the user input and checks it. It asks again until the input is valid |
 | `util/exception/InputEndedException.java` | The error thrown when the input ends (for example Ctrl+D) while the program wants to read more |
 
-How the classes work together: `Main` shows the menu and uses `InputHelper` to read the input. It then calls `EnrollmentService`, the service calls `StudentRepository`, and the repository stores `Student` objects.
+How the classes work together: `Main` shows the menu and uses `InputHelper` to read the input. It then calls the `EnrollmentService` interface. The real object behind it is `LocalEnrollmentService` (dynamic binding), which calls `StudentRepository`. The repository stores `Student` objects.
 
 (These names may change. Please update this table if they do.)
 

@@ -1,81 +1,33 @@
 package com.sait.enrollment.service;
 
 import com.sait.enrollment.model.Student;
-import com.sait.enrollment.repository.StudentRepository;
 import com.sait.enrollment.service.exception.EnrollmentException;
 
 import java.util.List;
 
 /**
- * The rules of the system. The menu (UI) calls this class, and this class calls the repository.
- * It checks the data first and throws an EnrollmentException when the data is not valid.
+ * The list of actions the menu can ask for. It only says WHAT can be done. It does not say HOW.
+ * The class LocalEnrollmentService does the work.
  * <p>
- * CONCEPT: Subprograms - each public method does one job: add, modify, remove, show all.
+ * CONCEPT: Dynamic binding - Main uses a variable of this interface type. Java decides at run time
+ * which class's method to run, based on the real object behind the variable.
+ * To use another storage later (for example a database), we can write a new class that implements
+ * this interface, and Main does not need to change.
  */
-public class EnrollmentService {
+public interface EnrollmentService {
 
-    private final StudentRepository studentRepository = new StudentRepository();
+    /** Adds a new student (it must not have an ID yet). Returns the student with its new ID. */
+    Student add(Student student) throws EnrollmentException;
 
-    /**
-     * Adds a new student. A new student must not have an ID yet (the ID is 0).
-     * Returns the same student, now with an ID.
-     * <p>
-     * CONCEPT: Conditionals - if checks for null and for an existing ID.
-     */
-    public Student add(Student student) throws EnrollmentException {
-        if (null == student || student.getStudentId() > 0) {
-            throw new EnrollmentException("invalid student data.");
-        }
-        studentRepository.insert(student);
-        return student;
-    }
+    /** Changes an existing student. Throws an exception if the data is not valid or the ID is not found. */
+    Student modify(Student student) throws EnrollmentException;
 
-    /**
-     * Changes an existing student. The student must have a valid ID (greater than 0).
-     * The data in the given student is copied into the stored student.
-     * Throws an exception if the data is not valid or the ID is not found.
-     * Returns the student that is stored in the repository (not the object that was passed in).
-     */
-    public Student modify(Student student) throws EnrollmentException {
-        if (null == student || student.getStudentId() <= 0) {
-            throw new EnrollmentException("invalid student data.");
-        }
+    /** Removes the student with this ID. Returns true if it was removed. */
+    boolean remove(long studentId);
 
-        if (studentRepository.update(student.getStudentId(), student) <= 0) {
-            throw new EnrollmentException("student not found.");
-        }
-        return studentRepository.findStudentById(student.getStudentId());
-    }
+    /** Returns all students. */
+    List<Student> showAllStudents();
 
-    /**
-     * Removes the student with this ID. Returns true if removed, false if the ID is not valid
-     * or not found.
-     * <p>
-     * CONCEPT: Pass by value - studentId is a primitive. This method gets a copy,
-     * so the caller's variable never changes.
-     */
-    public boolean remove(long studentId) {
-        if (studentId <= 0) {
-            return false;
-        }
-        return studentRepository.delete(studentId) > 0;
-    }
-
-    /**
-     * Returns all students. The list is a copy (see StudentRepository.findAll).
-     */
-    public List<Student> showAllStudents() {
-        return studentRepository.findAll();
-    }
-
-    /**
-     * Returns the student with this ID, or null if there is none.
-     * <p>
-     * CONCEPT: Referencing - this returns the stored object itself, not a copy. The caller should not
-     * change it directly. To change a student, make a copy, change the copy and call modify().
-     */
-    public Student findStudentById(long studentId) {
-        return studentRepository.findStudentById(studentId);
-    }
-
+    /** Returns the student with this ID, or null if there is none. */
+    Student findStudentById(long studentId);
 }
