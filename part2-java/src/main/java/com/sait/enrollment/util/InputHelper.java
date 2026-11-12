@@ -7,25 +7,24 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
- * Reads and checks the text the user types. Every read method keeps asking until the input is valid.
+ * Reads and checks what the user types. Each method asks again until the input is valid.
  * If the input ends (EOF), the methods throw InputEndedException.
  * <p>
- * CONCEPT: Subprograms - small methods with parameters and return values. Each method has one job.
- * CONCEPT: Data types - the user always types text (String). We convert it to int, double,
- * LocalDate or char ourselves, so the conversion is explicit.
+ * CONCEPT: Subprograms - small methods with parameters and return values.
+ * CONCEPT: Data types - the user types text (String). We convert it to int, double, LocalDate or char ourselves.
  */
 public class InputHelper {
 
-    // CONCEPT: Scope - private field: only this class can use the Scanner, and all methods share it.
-    // final means the variable always points to the same Scanner. Never call scanner.close(), it would close System.in.
+    // CONCEPT: Scope - a private field that all methods share. final means it always points to the same Scanner.
+    // Never call scanner.close(), because it would close System.in.
     private final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Asks until the user types some text that is not empty. Returns the text without spaces at both ends.
+     * Asks until the user types some text. Returns the text without spaces at both ends.
      * <p>
-     * CONCEPT: Conditionals - an if statement checks for empty input, and the while loop asks again.
-     * CONCEPT: Pass by value - the parameter prompt is a copy of the reference to the String.
-     * Strings cannot be changed, so the caller's text is never affected.
+     * CONCEPT: Conditionals - if checks for empty input, and while asks again.
+     * CONCEPT: Pass by value - prompt is a copy of the reference. A String cannot be changed,
+     * so the caller's text is safe.
      */
     public String readNonEmpty(String prompt) throws InputEndedException {
         while (true) {
@@ -43,9 +42,9 @@ public class InputHelper {
     /**
      * Asks until the user types a whole number from min to max (both included).
      * <p>
-     * CONCEPT: Pass by value - min and max are primitives, so the method gets copies of the numbers.
+     * CONCEPT: Pass by value - min and max are copied.
      * CONCEPT: Exceptions - Integer.parseInt throws NumberFormatException when the text is not a number.
-     * We catch it and ask again, so the program does not crash.
+     * We catch it and ask again.
      */
     public int readInt(String prompt, int min, int max) throws InputEndedException {
         while (true) {
@@ -57,7 +56,7 @@ public class InputHelper {
                 continue;
             }
             try {
-                // Explicit conversion from String to int.
+                // Convert the text to an int (explicit conversion).
                 int value = Integer.parseInt(input.trim());
                 if (min <= value && value <= max) {
                     return value;
@@ -71,10 +70,10 @@ public class InputHelper {
     }
 
     /**
-     * Asks until the user types a real date in the format yyyy-MM-dd that is not in the future.
+     * Asks until the user types a real date (yyyy-MM-dd) that is not in the future.
      * <p>
-     * CONCEPT: Data types - LocalDate is a reference type. Its parse method checks the format and also
-     * rejects dates that do not exist, for example 2001-02-30.
+     * CONCEPT: Data types - LocalDate is an object type. parse() rejects wrong formats
+     * and dates that do not exist, like 2001-02-30.
      */
     public LocalDate readDate(String prompt) throws InputEndedException {
         while (true) {
@@ -86,7 +85,7 @@ public class InputHelper {
                 continue;
             }
             try {
-                // Throws DateTimeParseException when the text is not a valid date.
+                // parse() throws DateTimeParseException when the text is not a valid date.
                 LocalDate date = LocalDate.parse(input.trim());
                 if (date.isAfter(LocalDate.now())) {
                     printError("date of birth cannot be in the future.");
@@ -101,8 +100,8 @@ public class InputHelper {
     }
 
     /**
-     * Asks until the user types a number from min to max (both included).
-     * It is used for the GPA. The check also rejects NaN, because every comparison with NaN is false.
+     * Asks until the user types a number from min to max (both included). It is used for the GPA.
+     * NaN is rejected too, because every comparison with NaN is false.
      * <p>
      * CONCEPT: Data types - double is a primitive type for numbers with a decimal point.
      */
@@ -116,7 +115,7 @@ public class InputHelper {
                 continue;
             }
             try {
-                // Explicit conversion from String to double.
+                // Convert the text to a double (explicit conversion).
                 double value = Double.parseDouble(input.trim());
                 if (min <= value && value <= max) {
                     return value;
@@ -130,9 +129,11 @@ public class InputHelper {
     }
 
     /**
-     * Asks until the user types M, F or X (lower case is also accepted). Returns it as an upper case char.
+     * Asks until the user types M, F or X (lower case is accepted). Returns an upper case char.
      * <p>
      * CONCEPT: Data types - char holds one character. A String is not a char, so we use charAt(0).
+     * CONCEPT: Referencing - == compares references, but equals() compares the text.
+     * So we use equals() for Strings.
      */
     public char readGender(String prompt) throws InputEndedException {
         while (true) {
@@ -148,19 +149,19 @@ public class InputHelper {
                 printError("gender must be M, F or X.");
                 continue;
             }
-            // The text has exactly one character here, so charAt(0) is safe.
+            // The text has one character here, so charAt(0) is safe.
             return gender.charAt(0);
         }
     }
 
-    /** Prints an error in one fixed format. The Python version must use the same format. */
+    /** Prints an error in one fixed format. Python must use the same format. */
     private void printError(String errorMessage) {
         System.out.println("[ERROR]: " + errorMessage);
     }
 
     /**
-     * Checks that there is another line to read. If not, the input has ended (EOF) and we throw an exception.
-     * We must call this before every nextLine(), because nextLine() crashes when there is no more input.
+     * Throws InputEndedException when there is no more input (EOF).
+     * We call it before every nextLine(), because nextLine() crashes when there is no more input.
      */
     private void checkEOF() throws InputEndedException {
         if (!scanner.hasNextLine()) {

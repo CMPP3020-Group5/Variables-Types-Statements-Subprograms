@@ -6,13 +6,13 @@ import com.sait.enrollment.service.exception.EnrollmentException;
 import java.util.List;
 
 /**
- * The list of actions the menu can ask for. It only says WHAT can be done. It does not say HOW.
- * The class LocalEnrollmentService does the work.
+ * The actions the menu can ask for. It says WHAT can be done, not HOW.
+ * LocalEnrollmentService does the work.
  * <p>
- * CONCEPT: Dynamic binding - Main uses a variable of this interface type. Java decides at run time
- * which class's method to run, based on the real object behind the variable.
- * To use another storage later (for example a database), we can write a new class that implements
- * this interface, and Main does not need to change.
+ * CONCEPT: Dynamic binding - Main uses a variable of this interface type.
+ * Java runs the method of the real object at run time.
+ * Another class (for example one that uses a database) could implement this interface,
+ * and Main would not need to change.
  */
 public interface EnrollmentService {
 

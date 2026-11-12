@@ -8,22 +8,19 @@ import com.sait.enrollment.service.exception.EnrollmentException;
 import java.util.List;
 
 /**
- * The rules of the system. The menu (UI) calls this class through the EnrollmentService interface,
- * and this class calls the repository.
- * It checks the data first and throws an EnrollmentException when the data is not valid.
+ * The rules of the system. Main calls it through the EnrollmentService interface,
+ * and it calls the repository. It checks the data and throws an EnrollmentException when the data is not valid.
  * <p>
- * CONCEPT: Subprograms - each public method does one job: add, modify, remove, show all.
- * CONCEPT: Dynamic binding - this class implements EnrollmentService. In Main the variable has the
- * interface type, but the object is a LocalEnrollmentService, so Java runs the methods of this class at run time.
- * The annotation @Override tells the compiler that the method comes from the interface.
+ * CONCEPT: Subprograms - each method does one job.
+ * CONCEPT: Dynamic binding - this class implements EnrollmentService.
+ * The annotation @Override tells the compiler that a method comes from the interface.
  */
 public class LocalEnrollmentService implements EnrollmentService {
 
     private final StudentRepository studentRepository = new StudentRepository();
 
     /**
-     * Adds a new student. A new student must not have an ID yet (the ID is 0).
-     * Returns the same student, now with an ID.
+     * Adds a new student. A new student must not have an ID yet (it is 0). Returns the student with its new ID.
      * <p>
      * CONCEPT: Conditionals - if checks for null and for an existing ID.
      */
@@ -37,10 +34,8 @@ public class LocalEnrollmentService implements EnrollmentService {
     }
 
     /**
-     * Changes an existing student. The student must have a valid ID (greater than 0).
-     * The data in the given student is copied into the stored student.
-     * Throws an exception if the data is not valid or the ID is not found.
-     * Returns the student that is stored in the repository (not the object that was passed in).
+     * Changes an existing student. The student must have a valid ID. The data is copied into the stored student.
+     * Throws an exception if the data is not valid or the ID is not found. Returns the stored student.
      */
     @Override
     public Student modify(Student student) throws EnrollmentException {
@@ -55,11 +50,9 @@ public class LocalEnrollmentService implements EnrollmentService {
     }
 
     /**
-     * Removes the student with this ID. Returns true if removed, false if the ID is not valid
-     * or not found.
+     * Removes the student with this ID. Returns true if removed, or false if the ID is not valid or not found.
      * <p>
-     * CONCEPT: Pass by value - studentId is a primitive. This method gets a copy,
-     * so the caller's variable never changes.
+     * CONCEPT: Pass by value - studentId is copied, so the caller's variable does not change.
      */
     @Override
     public boolean remove(long studentId) {
@@ -70,7 +63,7 @@ public class LocalEnrollmentService implements EnrollmentService {
     }
 
     /**
-     * Returns all students. The list is a copy (see StudentRepository.findAll).
+     * Returns all students (a copy of the list).
      */
     @Override
     public List<Student> showAllStudents() {
@@ -80,8 +73,8 @@ public class LocalEnrollmentService implements EnrollmentService {
     /**
      * Returns the student with this ID, or null if there is none.
      * <p>
-     * CONCEPT: Referencing - this returns the stored object itself, not a copy. The caller should not
-     * change it directly. To change a student, make a copy, change the copy and call modify().
+     * CONCEPT: Referencing - this returns the stored object itself, not a copy.
+     * To change a student, copy it, change the copy, and call modify().
      */
     @Override
     public Student findStudentById(long studentId) {
