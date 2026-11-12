@@ -76,6 +76,6 @@ Run all files. The script compiles the program and saves each output in `tests/o
 bash tests/run-tests.sh
 ```
 
-We tested all menu options (Add, Modify, Remove, Display, the demo, and Exit) with normal inputs, edge cases, and invalid inputs (for example, empty input, wrong date format, a date that does not exist, an unknown student ID, and numbers out of range), and input that ends in the middle of a question. See `tests/README.md` for what each file tests.
+We tested all menu options (Add, Modify, Remove, Display, the demo, and Exit) with normal inputs, edge cases, and invalid inputs (for example, empty input, wrong date format, a date that does not exist, an unknown student ID, and numbers out of range), and input that ends in the middle of a question. See `tests/README.md` for what each file tests. Screenshots of the runs are in `tests/screenshots/`.
 
 When the input comes from a file, the typed lines are not shown on the screen, so the questions appear one after another on the same line. This is normal.
