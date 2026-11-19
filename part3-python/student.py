@@ -1,5 +1,8 @@
 
 
+from decimal import ROUND_HALF_UP, Decimal
+
+
 class Student:
   def __init__(self, firstName, lastName, birthDate, gender, previousGpa, currentSemester, program, numberOfCourses):
     self.firstName = firstName
@@ -19,8 +22,9 @@ class Student:
             f" | Program: {self.program} | Courses: {self.numberOfCourses}"
         )
 
-def formatGpa(arg1):
-  pass
+def formatGpa(gpa: float) -> str:
+    # Use decimal half-up rounding to match Java's %.2f formatting.
+    return str(Decimal(str(gpa)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
 
 class StudentRepository:
   def __init__(self):

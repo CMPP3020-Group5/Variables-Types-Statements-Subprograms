@@ -125,7 +125,59 @@ def printAll():
     print(student)
 
 def parameterPassingDemo():
-  pass
+  print("\n===Parameter-passing demo===")
+  demoPrimitive()
+  demoChangeField()
+  demoNewObject()
+  demoString()
+
+def demoPrimitive():
+  print("\n[1] Primitive (int): pass by value")
+  courses = 5
+  print(f"Before: courses = {courses}")
+  changeNumber(courses)
+  print(f"After: courses = {courses}")
+  print("-> The method got a copy of the number, so the original did not change.")
+
+def changeNumber(courses):
+  courses = 10
+  print(f"Inside method: courses = {courses}")
+
+def demoChangeField():
+  print("\n[2] Object (Student): change a field")
+  student = Student("Jason", "Wu", "2000-01-01", "M", 3.6, 1, "Software Development", 5)
+  print(f"Before: student = {student.firstName}, {student.lastName}, {student.previousGpa}")
+  changeGpa(student)
+  print(f"After: student = {student.firstName}, {student.lastName}, {student.previousGpa}")
+  print("-> The method got a copy of the reference, but it points to the same object, so the change is visible.")
+
+def changeGpa(student):
+  student.previousGpa = 3.8
+  print(f"Inside method: GPA = {student.previousGpa}")
+
+def demoNewObject():
+  print("\n[3] Object (Student): assign a new object")
+  student = Student("Jason", "Wu", "2000-01-01", "M", 3.6, 1, "Software Development", 5)
+  print(f"Before: {student.firstName} {student.lastName}")
+  replaceStudent(student)
+  print(f"After: {student.firstName} {student.lastName}")
+  print("-> The method changed only its own copy of the reference. The caller's reference did not change.")
+
+def replaceStudent(student):
+  student = Student("Amy", "Lee", "2001-05-20", "F", 3.9, 2, "Software Development", 4)
+  print(f"Inside method: {student.firstName} {student.lastName}") 
+
+def demoString():
+  print("\n[4] String: immutable")
+  program = "Software Development"
+  print(f"Before: program = {program}")
+  changeProgram(program)
+  print(f"After: program = {program}")
+  print("-> A string cannot be changed. The method made a new String")
+
+def changeProgram(program):
+  program = program + " (Year 2)"
+  print(f"Inside method: program = {program}")
 
 
 
