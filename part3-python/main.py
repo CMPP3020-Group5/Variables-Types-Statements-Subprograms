@@ -8,15 +8,24 @@ def main():
   try:
       
       while True:
-        print("\n")
-        print("===Student Enrollment Management System===")
+        print()
+        print("=== Student Enrollment Management System ===")
         print("1. Add student")
         print("2. Modify student")
         print("3. Remove student")
         print("4. Display all students")
         print("5. Parameter-passing demo")
         print("6. Exit")
-        choice = input("Choose an option (1-6): ")
+        
+        while True:
+          choice = input("Choose an option (1-6): ").strip()
+          if choice is None or choice.strip() == "":
+            print("[ERROR]: value cannot be empty.")
+            continue
+          if choice in ["1", "2", "3", "4", "5", "6"]:
+            break
+          print("[ERROR]: please enter a whole number between 1 and 6.")
+          
         match choice:
           case "1":
             addStudent()
@@ -29,14 +38,13 @@ def main():
           case "5":
             parameterPassingDemo()
           case "6":
-            print("Exiting the program.")
             return
           case _:
-            print("Invalid choice. Please enter a number between 1 and 6.")
-  except ValueError:
-    print("Invalid input. Please enter a number.")
+            print("[ERROR]: please enter a whole number between 1 and 6.")
+  except EOFError:
+    print("\nInput ended.")
   finally:
-      print("Goodbye.")
+    print("Goodbye.")
 
 
 
@@ -44,9 +52,9 @@ def addStudent():
   # verifies that the user input is valid before creating a new student object
   firstName = readNonEmpty("First name: ")
   lastName = readNonEmpty("Last name: ")
-  birthDate = readDate("Birth date (YYYY-MM-DD): ")
+  birthDate = readDate("Date of birth (yyyy-MM-dd): ")
   gender = readGender("Gender (M/F/X): ")
-  previousGpa = readFloat("Previous GPA (0.0 - 4.0): ", 0.0, 4.0)
+  previousGpa = readFloat("Previous GPA (0.0-4.0): ", 0.0, 4.0)
   currentSemester = readInt("Current semester (1-4): ", 1, 4)
   program = readNonEmpty("Program: ")
   numberOfCourses = readInt("Number of courses: ", 0, 10)
@@ -59,14 +67,14 @@ def addStudent():
 
 #Changes a field of a student
 def modifyStudent():
-  #python doesn't have a max integer value so the lastStudentID is used as the max value
-  studentId = readInt("Student ID: ",1, studentRepository.lastStudentID)
+  #python doesn't have a max integer value so the Java max value of 2147483647 is used instead
+  studentId = readInt("Student ID: ",1, 2147483647)
   student = studentRepository.findStudentById(studentId)
   if student is None:
-    print("[ERROR]: student not found")
+    print("[ERROR]: student not found.")
     return
   print(student)
-  print("\n")
+  print("")
   print("0. Cancel")
   print("1. First name")
   print("2. Last name")
@@ -79,7 +87,7 @@ def modifyStudent():
 
 #working on a copy of the student
   updatingStudent = student
-  choice = readInt("Choose an option (0-8): ", 0, 8)
+  choice = readInt("Choose a field to change (0-8): ", 0, 8)
   match choice:
     case 0:
       print("Modify cancelled.")
@@ -89,11 +97,11 @@ def modifyStudent():
     case 2:
       updatingStudent.lastName = readNonEmpty("Last name: ")
     case 3:
-      updatingStudent.birthDate = readDate("Birth date (YYYY-MM-DD): ")
+      updatingStudent.birthDate = readDate("Date of birth (yyyy-MM-dd): ")
     case 4:
       updatingStudent.gender = readGender("Gender (M/F/X): ")
     case 5:
-      updatingStudent.previousGpa = readFloat("Previous GPA (0.0 - 4.0): ", 0.0, 4.0)
+      updatingStudent.previousGpa = readFloat("Previous GPA (0.0-4.0): ", 0.0, 4.0)
     case 6:
       updatingStudent.currentSemester = readInt("Current semester (1-4): ", 1, 4)
     case 7:
@@ -110,11 +118,11 @@ def modifyStudent():
     print(f"[ERROR]Error modifying student: {e}")
 
 def removeStudent():
-  studentId = readInt("Student ID: ",1, studentRepository.lastStudentID)
+  studentId = readInt("Student ID: ",1, 2147483647)
   if studentRepository.remove(studentId):
     print("Student removed.")
   else:
-    print("[ERROR]: student not found")
+    print("[ERROR]: student not found.")
   pass
 
 def printAll():
@@ -125,7 +133,7 @@ def printAll():
     print(student)
 
 def parameterPassingDemo():
-  print("\n===Parameter-passing demo===")
+  print("\n=== Parameter-passing demo ===")
   demoPrimitive()
   demoChangeField()
   demoNewObject()
@@ -136,31 +144,31 @@ def demoPrimitive():
   courses = 5
   print(f"Before: courses = {courses}")
   changeNumber(courses)
-  print(f"After: courses = {courses}")
+  print(f"After:  courses = {courses}")
   print("-> The method got a copy of the number, so the original did not change.")
 
 def changeNumber(courses):
-  courses = 10
+  courses = 6
   print(f"Inside method: courses = {courses}")
 
 def demoChangeField():
   print("\n[2] Object (Student): change a field")
   student = Student("Jason", "Wu", "2000-01-01", "M", 3.6, 1, "Software Development", 5)
-  print(f"Before: student = {student.firstName}, {student.lastName}, {student.previousGpa}")
+  print(f"Before: {student.firstName} {student.lastName}, GPA {student.previousGpa:.2f}")
   changeGpa(student)
-  print(f"After: student = {student.firstName}, {student.lastName}, {student.previousGpa}")
+  print(f"After:  {student.firstName} {student.lastName}, GPA {student.previousGpa:.2f}")
   print("-> The method got a copy of the reference, but it points to the same object, so the change is visible.")
 
 def changeGpa(student):
-  student.previousGpa = 3.8
-  print(f"Inside method: GPA = {student.previousGpa}")
+  student.previousGpa = 4.00
+  print(f"Inside method: GPA = {student.previousGpa:.2f}")
 
 def demoNewObject():
   print("\n[3] Object (Student): assign a new object")
   student = Student("Jason", "Wu", "2000-01-01", "M", 3.6, 1, "Software Development", 5)
   print(f"Before: {student.firstName} {student.lastName}")
   replaceStudent(student)
-  print(f"After: {student.firstName} {student.lastName}")
+  print(f"After:  {student.firstName} {student.lastName}")
   print("-> The method changed only its own copy of the reference. The caller's reference did not change.")
 
 def replaceStudent(student):
@@ -172,8 +180,8 @@ def demoString():
   program = "Software Development"
   print(f"Before: program = {program}")
   changeProgram(program)
-  print(f"After: program = {program}")
-  print("-> A string cannot be changed. The method made a new String")
+  print(f"After:  program = {program}")
+  print("-> A String cannot be changed. The method made a new String.")
 
 def changeProgram(program):
   program = program + " (Year 2)"
