@@ -139,6 +139,7 @@ def parameterPassingDemo():
   demoNewObject()
   demoString()
 
+#The following functions demonstrate how Python handles parameter passing for different types of data.
 def demoPrimitive():
   print("\n[1] Primitive (int): pass by value")
   courses = 5

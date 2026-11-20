@@ -58,10 +58,11 @@ def readFloat(prompt, min, max):
 def readInt(prompt, min, max):
     while True:
         try:
-          value = int(input(prompt))
+          value = input(prompt).strip()
           if value is None or value == "":
             print("[ERROR]: value cannot be empty.")
             continue
+          value = int(value)
       
           if min <= value <= max:
               return value
