@@ -7,7 +7,7 @@ class Student:
   def __init__(self, firstName, lastName, birthDate, gender, previousGpa, currentSemester, program, numberOfCourses):
     self.firstName = firstName
     self.lastName = lastName
-    self.birthDate = birthDate
+    self.birthDate = birthDate if isinstance(birthDate, str) else birthDate.strftime("%Y-%m-%d")
     self.gender = gender
     self.previousGpa = previousGpa
     self.currentSemester = currentSemester
