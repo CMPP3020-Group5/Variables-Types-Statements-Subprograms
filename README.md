@@ -29,6 +29,6 @@ Both programs should show the same menus, messages, and results.
 | Member | Work |
 |---|---|
 | Jason (Jiajun) Wu | Part 2 (Java) |
-| TBD | Part 3 (Python) |
+| Karina Chiste | Part 3 (Python) |
 
 Everyone helps with Part 1 (pseudocode), Part 4 (comparison), and Part 5 (peer review).
